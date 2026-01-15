@@ -25,7 +25,6 @@ import Register from "./pages/Register";
 // (3) Impor Halaman Admin
 import AdminDashboard from "./admin/AdminDashboard";
 import ViewRoom from "./admin/ViewRooms";
-import AddFasilitas from "./admin/addfasilitas";
 
 function App() {
   return (
