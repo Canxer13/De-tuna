@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./Contact.css";
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const Contact = () => {
   // State untuk Input Form
   const [formData, setFormData] = useState({
@@ -41,10 +42,7 @@ const Contact = () => {
     };
 
     try {
-      await axios.post(
-        "import.meta.env.VITE_API_BASE_URL/api/v1/contact-messages",
-        payload
-      );
+      await axios.post(`${BASE_URL}/api/v1/contact-messages`, payload);
       alert("Pesan berhasil dikirim! Terima kasih telah menghubungi kami.");
 
       // Reset Form

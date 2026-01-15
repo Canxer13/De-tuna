@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom"; // Hapus useNavigate karena tida
 import axios from "axios";
 import "./Booking.css";
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const Booking = () => {
   const location = useLocation();
   // const navigate = useNavigate(); <--- HAPUS INI (Penyebab Error 1)
@@ -44,7 +45,7 @@ const Booking = () => {
     try {
       const token = localStorage.getItem("authToken");
       const response = await axios.post(
-        "import.meta.env.VITE_API_BASE_URL/api/v1/check-promo",
+        `${BASE_URL}/api/v1/check-promo`,
         { promo_code: promoCode },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -87,7 +88,7 @@ const Booking = () => {
 
     try {
       const response = await axios.post(
-        `import.meta.env.VITE_API_BASE_URL/api/v1/bookings`,
+        `${BASE_URL}/api/v1//bookings`,
         bookingData,
         { headers: { Authorization: `Bearer ${token}` } }
       );

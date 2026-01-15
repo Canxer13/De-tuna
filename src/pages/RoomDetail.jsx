@@ -3,6 +3,8 @@ import { useParams, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./RoomDetails.css";
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const RoomDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -19,7 +21,7 @@ const RoomDetail = () => {
   useEffect(() => {
     const fetchRoomDetail = async () => {
       try {
-        let url = `import.meta.env.VITE_API_BASE_URL/api/v1/rooms/${id}`;
+        let url = `${BASE_URL}/api/v1//rooms/${id}`;
         if (checkIn && checkOut) {
           url += `?check_in_date=${checkIn}&check_out_date=${checkOut}`;
         }

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./MyBookings.css"; // Kita buat CSS-nya setelah ini
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,12 +19,9 @@ const MyBookings = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem("authToken");
-      const response = await axios.get(
-        "import.meta.env.VITE_API_BASE_URL/api/v1/my-bookings",
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const response = await axios.get(`${BASE_URL}/api/v1/my-bookings`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setBookings(response.data.data);
     } catch (err) {
       console.error("Gagal load booking", err);
@@ -49,7 +48,7 @@ const MyBookings = () => {
     try {
       const token = localStorage.getItem("authToken");
       await axios.post(
-        "import.meta.env.VITE_API_BASE_URL/api/v1/reviews",
+        `${BASE_URL}/api/v1/reviews`,
         {
           booking_id: selectedBookingId,
           rating: reviewData.rating,

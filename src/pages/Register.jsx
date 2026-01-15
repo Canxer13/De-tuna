@@ -6,6 +6,8 @@ import axios from "axios";
 // (1) IMPOR BIASA (TANPA 'styles')
 import "./Register.css";
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -28,7 +30,7 @@ const Register = () => {
     }
 
     try {
-      await axios.post("import.meta.env.VITE_API_BASE_URL/api/v1/register", {
+      await axios.post(`${BASE_URL}/api/v1/register`, {
         name: name,
         email: email,
         password: password,

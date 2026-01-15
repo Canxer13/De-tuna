@@ -3,6 +3,7 @@ import "./Home.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const Home = () => {
   const navigate = useNavigate();
   const [dates, setDates] = useState({ checkIn: "", checkOut: "" });
@@ -16,9 +17,7 @@ const Home = () => {
     const fetchPopularRooms = async () => {
       try {
         // ✅ UPDATE: URL sudah diganti jadi 'popular-rooms' agar tidak bentrok dengan ID
-        const response = await axios.get(
-          "import.meta.env.VITE_API_BASE_URL/api/v1/popular-rooms"
-        );
+        const response = await axios.get(`${BASE_URL}/api/v1/popular-rooms`);
         if (response.data.success) {
           setPopularRooms(response.data.data);
         }

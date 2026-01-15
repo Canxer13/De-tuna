@@ -3,6 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import "./Rooms.css";
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const Rooms = () => {
   // State Data Kamar & Loading
   const [rooms, setRooms] = useState([]);
@@ -28,7 +30,7 @@ const Rooms = () => {
     setLoading(true);
     try {
       // Logic Filter ke API
-      let url = "import.meta.env.VITE_API_BASE_URL/api/v1/rooms";
+      let url = `${BASE_URL}/api/v1/rooms`;
       const params = [];
       if (checkIn) params.push(`check_in_date=${checkIn}`);
       if (checkOut) params.push(`check_out_date=${checkOut}`);

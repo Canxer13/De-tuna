@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./ProfileSetting.css";
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const ProfileSetting = () => {
   const [user, setUser] = useState({
     full_name: "",
@@ -19,12 +21,9 @@ const ProfileSetting = () => {
     const fetchProfile = async () => {
       try {
         const token = localStorage.getItem("authToken");
-        const response = await axios.get(
-          "import.meta.env.VITE_API_BASE_URL/api/v1/me/profile",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        const response = await axios.get(`${BASE_URL}/api/v1/me/profile`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         const userData = response.data.data;
         setUser({
           full_name: userData.full_name || "",
@@ -70,16 +69,12 @@ const ProfileSetting = () => {
 
     try {
       // HAPUS "const response =" KARENA TIDAK DIPAKAI
-      await axios.post(
-        "import.meta.env.VITE_API_BASE_URL/api/v1/me/profile",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      await axios.post(`${BASE_URL}/api/v1/me/profile`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       alert("Profil berhasil diperbarui!");
       window.location.reload();
