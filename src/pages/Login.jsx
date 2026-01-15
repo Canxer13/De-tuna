@@ -1,7 +1,5 @@
-// File: src/pages/Login.jsx
-
 import React, { useState } from "react";
-import { Link } from "react-router-dom"; // Hapus useNavigate dari sini
+import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Login.css";
 
@@ -11,7 +9,8 @@ const Login = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // HAPUS BARIS INI: const navigate = useNavigate();
+  // Ambil URL Base dari Environment Variable
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -19,17 +18,14 @@ const Login = () => {
     setError(null);
 
     try {
-      const response = await axios.post(
-        "import.meta.env.VITE_API_BASE_URL/api/v1/login",
-        {
-          email: email,
-          password: password,
-        }
-      );
+      // ✅ PERBAIKAN: Gunakan Backticks (``) dan ${} agar variabel terbaca
+      const response = await axios.post(`${BASE_URL}/api/v1/login`, {
+        email: email,
+        password: password,
+      });
 
       setLoading(false);
 
-      // Ambil data
       const authData = response.data.data;
       const token = authData.token;
       const user = authData.user;
@@ -58,8 +54,8 @@ const Login = () => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href =
-      "import.meta.env.VITE_API_BASE_URL/api/v1/auth/google";
+    // ✅ PERBAIKAN: Gunakan Backticks untuk redirect Google
+    window.location.href = `${BASE_URL}/api/v1/auth/google`;
   };
 
   return (
@@ -99,7 +95,6 @@ const Login = () => {
             </button>
           </form>
 
-          {/* Tombol Google */}
           <div
             style={{ display: "flex", alignItems: "center", margin: "20px 0" }}
           >
