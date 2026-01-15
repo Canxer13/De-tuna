@@ -57,7 +57,6 @@ function App() {
           {" "}
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/view-room/:id" element={<ViewRoom />} />
-          <Route path="/admin/add-fasilitas" element={<AddFasilitas />} />
         </Route>
       </Route>
     </Routes>
