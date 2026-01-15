@@ -1,13 +1,10 @@
-// File: src/pages/GoogleCallback.jsx
-
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const GoogleCallback = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [status, setStatus] = useState("Memproses login...");
 
   useEffect(() => {
@@ -18,14 +15,15 @@ const GoogleCallback = () => {
 
       if (!token) {
         setStatus("Gagal: Token tidak ditemukan.");
-        setTimeout(() => (window.location.href = "/login"), 2000);
+        setTimeout(() => navigate("/login"), 2000);
         return;
       }
 
       try {
-        setStatus("Mengambil data profil...");
+        setStatus("Mengambil profil user...");
         localStorage.setItem("authToken", token);
 
+        // ✅ Gunakan Backticks (``) - JANGAN PAKAI TANDA KUTIP BIASA
         const response = await axios.get(
           `${import.meta.env.VITE_API_BASE_URL}/api/v1/me`,
           {
@@ -33,62 +31,67 @@ const GoogleCallback = () => {
           }
         );
 
-        // ✅ PERBAIKAN: Pastikan data user ada sebelum mengakses propertinya
-        const userData = response.data?.data;
+        // ✅ PENANGANAN STRUKTUR DATA (Bisa response.data.data atau response.data)
+        const userData = response.data?.data || response.data;
 
-        if (userData) {
+        if (userData && (userData.role || roleParam)) {
+          const finalRole = userData.role || roleParam;
+
           localStorage.setItem("user", JSON.stringify(userData));
-          localStorage.setItem("userRole", userData.role || roleParam);
+          localStorage.setItem("userRole", finalRole);
 
-          setStatus("Login berhasil! Mengalihkan...");
+          setStatus("Login Berhasil! Mengalihkan...");
 
-          if (userData.role === "admin" || userData.role === "super_admin") {
-            window.location.href = "/admin/dashboard";
-          } else {
-            window.location.href = "/";
-          }
+          setTimeout(() => {
+            if (finalRole === "admin" || finalRole === "super_admin") {
+              window.location.href = "/admin/dashboard";
+            } else {
+              window.location.href = "/";
+            }
+          }, 1000);
         } else {
-          throw new Error("Data user tidak ditemukan dalam respon API");
+          console.error("Struktur profil tidak dikenali:", response.data);
+          throw new Error("Struktur data user tidak sesuai.");
         }
       } catch (error) {
-        console.error("Gagal mengambil data user:", error);
-        setStatus("Gagal memverifikasi akun.");
-        localStorage.removeItem("authToken");
-        setTimeout(() => (window.location.href = "/login"), 3000);
+        console.error("Gagal verifikasi:", error);
+        setStatus(`Gagal: ${error.message || "Cek koneksi backend"}`);
+        localStorage.clear();
+        setTimeout(() => navigate("/login"), 3000);
       }
     };
 
     processLogin();
-  }, [location]);
+  }, [location, navigate]);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        flexDirection: "column",
-        fontFamily: "Poppins, sans-serif",
-      }}
-    >
-      <div
-        style={{
-          width: "50px",
-          height: "50px",
-          border: "5px solid #f3f3f3",
-          borderTop: "5px solid #b67b3f",
-          borderRadius: "50%",
-          animation: "spin 1s linear infinite",
-          marginBottom: "20px",
-        }}
-      ></div>
-      <p>{status}</p>
-      <style>
-        {`@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`}
-      </style>
+    <div style={styles.container}>
+      <div className="spinner" style={styles.spinner}></div>
+      <p style={styles.text}>{status}</p>
+      <style>{`@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`}</style>
     </div>
   );
+};
+
+const styles = {
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100vh",
+    fontFamily: "Arial",
+  },
+  spinner: {
+    width: "40px",
+    height: "40px",
+    border: "4px solid #f3f3f3",
+    borderTop: "4px solid #3498db",
+    borderRadius: "50%",
+    animation: "spin 1s linear infinite",
+    marginBottom: "15px",
+  },
+  text: { fontSize: "16px", color: "#555" },
 };
 
 export default GoogleCallback;
