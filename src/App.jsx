@@ -24,7 +24,6 @@ import Register from "./pages/Register";
 
 // (3) Impor Halaman Admin
 import AdminDashboard from "./admin/AdminDashboard";
-import ViewRoom from "./admin/ViewRooms";
 
 function App() {
   return (
@@ -55,7 +54,6 @@ function App() {
         <Route element={<AdminLayout />}>
           {" "}
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/admin/view-room/:id" element={<ViewRoom />} />
         </Route>
       </Route>
     </Routes>
