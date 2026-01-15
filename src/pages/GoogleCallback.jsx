@@ -12,10 +12,9 @@ const GoogleCallback = () => {
 
   useEffect(() => {
     const processLogin = async () => {
-      // 1. Ambil token & role dari URL
       const params = new URLSearchParams(location.search);
       const token = params.get("token");
-      const roleParam = params.get("role"); // Role sementara dari URL
+      const roleParam = params.get("role");
 
       if (!token) {
         setStatus("Gagal: Token tidak ditemukan.");
@@ -25,35 +24,35 @@ const GoogleCallback = () => {
 
       try {
         setStatus("Mengambil data profil...");
-
-        // 2. Simpan token dulu agar bisa request ke API
         localStorage.setItem("authToken", token);
 
-        // 3. Minta data User lengkap ke API (karena di URL cuma ada token)
-        const response = await axios.get(`${BASE_URL}/api/v1/me`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_BASE_URL}/api/v1/me`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
 
-        const userData = response.data.data; // Asumsi respon: { data: { ...user... } }
+        // ✅ PERBAIKAN: Pastikan data user ada sebelum mengakses propertinya
+        const userData = response.data?.data;
 
-        // 4. Simpan Data User Lengkap ke LocalStorage
-        localStorage.setItem("user", JSON.stringify(userData));
-        localStorage.setItem("userRole", userData.role || roleParam);
+        if (userData) {
+          localStorage.setItem("user", JSON.stringify(userData));
+          localStorage.setItem("userRole", userData.role || roleParam);
 
-        setStatus("Login berhasil! Mengalihkan...");
+          setStatus("Login berhasil! Mengalihkan...");
 
-        // 5. Redirect & Refresh (PENTING: Pakai window.location)
-        if (userData.role === "admin" || userData.role === "super_admin") {
-          window.location.href = "/admin/dashboard";
+          if (userData.role === "admin" || userData.role === "super_admin") {
+            window.location.href = "/admin/dashboard";
+          } else {
+            window.location.href = "/";
+          }
         } else {
-          window.location.href = "/";
+          throw new Error("Data user tidak ditemukan dalam respon API");
         }
       } catch (error) {
         console.error("Gagal mengambil data user:", error);
         setStatus("Gagal memverifikasi akun.");
-        // Bersihkan jika gagal
         localStorage.removeItem("authToken");
         setTimeout(() => (window.location.href = "/login"), 3000);
       }
