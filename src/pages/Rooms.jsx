@@ -3,10 +3,12 @@ import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import "./Rooms.css";
 
+// Ambil URL Base dari Environment Variable
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Rooms = () => {
   // State Data Kamar & Loading
+  // Inisialisasi dengan array kosong [] agar tidak undefined saat awal render
   const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -22,14 +24,15 @@ const Rooms = () => {
   );
   const [guests, setGuests] = useState(queryParams.get("guests") || 1);
 
+  // --- PERBAIKAN: Gunakan dependency array [] agar TIDAK infinite loop ---
   useEffect(() => {
     fetchRooms();
-  }); // Fetch awal
+  }, []); // Hanya berjalan 1x saat halaman dibuka
 
   const fetchRooms = async () => {
     setLoading(true);
     try {
-      // Logic Filter ke API
+      // Logic Filter ke API menggunakan Backticks
       let url = `${BASE_URL}/api/v1/rooms`;
       const params = [];
       if (checkIn) params.push(`check_in_date=${checkIn}`);
@@ -40,9 +43,13 @@ const Rooms = () => {
       }
 
       const response = await axios.get(url);
-      setRooms(response.data.data);
+
+      // --- PERBAIKAN: Pastikan data adalah array agar .map() tidak error ---
+      // Jika response.data.data tidak ada, maka gunakan array kosong []
+      setRooms(response.data?.data || []);
     } catch (error) {
       console.error("Gagal mengambil data kamar:", error);
+      setRooms([]); // Set ke array kosong jika terjadi error API
     } finally {
       setLoading(false);
     }
@@ -94,7 +101,6 @@ const Rooms = () => {
         <aside className="filters-sidebar">
           <div className="filter-box">
             <h3>Fasilitas Resort</h3>
-            {/* Contoh Checkbox Filter (Bisa dikembangkan nanti) */}
             <div className="filter-option">
               <input type="checkbox" id="wifi" />{" "}
               <label htmlFor="wifi">Free Wifi</label>
@@ -107,7 +113,6 @@ const Rooms = () => {
               <input type="checkbox" id="breakfast" />{" "}
               <label htmlFor="breakfast">Breakfast</label>
             </div>
-
             <div className="filter-actions">
               <button className="btn-apply-filter">Terapkan Filter</button>
               <button className="btn-reset-filter">Hapus Semua</button>
@@ -119,10 +124,10 @@ const Rooms = () => {
         <main className="rooms-main-list">
           {loading ? (
             <div className="loading-text">Mencari kamar terbaik...</div>
-          ) : (
+          ) : rooms && rooms.length > 0 ? (
             <div className="rooms-grid">
+              {/* Gunakan optional chaining untuk keamanan tambahan */}
               {rooms.map((room) => {
-                // LOGIKA STOK DARI BACKEND
                 const isAvailable = room.is_available !== false;
                 const stock = room.available_stock ?? room.stock;
 
@@ -133,7 +138,6 @@ const Rooms = () => {
                       !isAvailable ? "sold-out-card" : ""
                     }`}
                   >
-                    {/* OVERLAY SOLD OUT */}
                     {!isAvailable && (
                       <div className="sold-out-overlay">
                         <span className="sold-out-badge">HABIS</span>
@@ -167,7 +171,6 @@ const Rooms = () => {
                         Max Guest: {room.capacity} Orang
                       </p>
 
-                      {/* Peringatan Stok Menipis */}
                       {isAvailable && stock <= 3 && stock > 0 && (
                         <p className="stock-warning">🔥 Sisa {stock} kamar!</p>
                       )}
@@ -191,6 +194,10 @@ const Rooms = () => {
                   </div>
                 );
               })}
+            </div>
+          ) : (
+            <div className="no-rooms">
+              Maaf, tidak ada kamar yang tersedia untuk tanggal tersebut.
             </div>
           )}
         </main>
