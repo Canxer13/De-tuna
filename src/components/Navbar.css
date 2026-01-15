@@ -1,0 +1,199 @@
+/* File: src/components/Navbar.css */
+
+/* --- Layout Utama Navbar --- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 10%;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.nav-name {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.navbar nav {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+/* Link Navigasi */
+.navbar nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s;
+  font-size: 16px;
+}
+
+.navbar nav a:hover,
+.navbar nav a.active {
+  color: #f7a400;
+}
+
+/* Tombol Login/Regis */
+.btn-book {
+  background: #f7a400;
+  border: none;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s;
+  text-decoration: none; /* Tambahan biar tidak ada garis bawah */
+}
+
+.btn-book:hover {
+  background: #e39000;
+}
+
+/* --- User Menu (Saat Login) --- */
+.user-menu-container {
+  position: relative;
+  margin-left: 10px;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 30px;
+  transition: background-color 0.2s;
+  border: 1px solid transparent;
+}
+
+.user-menu:hover {
+  background-color: #f5f5f5;
+  border-color: #eee;
+}
+
+/* STYLE FOTO PROFIL (PENTING) */
+.user-avatar {
+  width: 35px; /* Ukuran stabil */
+  height: 35px;
+  border-radius: 50%; /* Wajib bulat */
+  object-fit: cover; /* Agar foto tidak gepeng */
+  border: 2px solid #f7a400; /* Border oranye tipis */
+  background-color: #eee; /* Placeholder warna sebelum gambar load */
+}
+
+.user-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #333;
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown-arrow {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* --- Dropdown Box --- */
+.dropdown-menu {
+  position: absolute;
+  top: 120%;
+  right: 0;
+  background-color: #fff;
+  min-width: 180px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  padding: 8px 0;
+  border: 1px solid #eee;
+  z-index: 1001;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 10px 20px;
+  text-align: left;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  box-sizing: border-box; /* Biar padding gak ngerusak lebar */
+  transition: background 0.2s, color 0.2s;
+}
+
+.dropdown-item:hover {
+  background-color: #fff8e1;
+  color: #b67b3f;
+}
+
+.logout-item {
+  border-top: 1px solid #eee;
+  color: #dc3545;
+  margin-top: 5px;
+}
+
+.logout-item:hover {
+  background-color: #fff5f5;
+  color: #c82333;
+}
+
+/* Animasi */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .navbar nav {
+    flex-direction: column;
+    width: 100%;
+  }
+  .user-menu-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .dropdown-menu {
+    width: 100%;
+    position: static;
+    box-shadow: none;
+    border: 1px solid #eee;
+    margin-top: 10px;
+    text-align: center;
+  }
+}

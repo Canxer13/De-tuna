@@ -1,0 +1,197 @@
+/* Container Utama */
+.booking-outer-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+/* Kartu Putih */
+.booking-summary-card {
+  background: white;
+  width: 100%;
+  max-width: 500px;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.summary-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Info Kamar Kecil di Atas */
+.room-info-box {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+  background: #fdfbf7;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.room-image-small img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.room-text-small h3 {
+  margin: 0 0 5px 0;
+  font-size: 1.1rem;
+  color: #5d4037;
+}
+
+.room-text-small p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+/* List Detail (Checkin, Checkout) */
+.details-list {
+  margin-bottom: 20px;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  color: #555;
+}
+
+.detail-item strong {
+  color: #333;
+}
+
+.payment-divider {
+  height: 1px;
+  background-color: #eee;
+  margin: 20px 0;
+}
+
+/* --- STYLE BARU: PROMO SECTION --- */
+.promo-section {
+  margin-bottom: 20px;
+}
+
+.promo-section label {
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: #555;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.promo-input-group {
+  display: flex;
+  gap: 10px;
+}
+
+.promo-input-group input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.promo-input-group button {
+  padding: 0 20px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.promo-input-group button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.promo-msg {
+  font-size: 0.85rem;
+  margin-top: 5px;
+  font-weight: 600;
+}
+.promo-msg.success {
+  color: #27ae60;
+}
+.promo-msg.error {
+  color: #e74c3c;
+}
+
+/* --- STYLE BARU: RINCIAN HARGA --- */
+.price-details {
+  margin-bottom: 25px;
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.price-row.discount {
+  color: #27ae60; /* Hijau diskon */
+  font-weight: bold;
+}
+
+.price-row.total {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #333;
+  border-top: 2px dashed #ddd;
+  padding-top: 15px;
+  margin-top: 10px;
+}
+
+.amount-text {
+  color: #e67e22; /* Warna Oranye Harga */
+}
+
+/* Tombol Bayar */
+.pay-now-button {
+  width: 100%;
+  padding: 15px;
+  background-color: #e67e22;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.pay-now-button:hover {
+  background-color: #d35400;
+}
+
+.pay-now-button:disabled {
+  background-color: #ccc;
+}
+
+.security-note {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #999;
+  margin-top: 15px;
+}
+
+.error-msg {
+  text-align: center;
+  padding: 50px;
+  color: red;
+  font-weight: bold;
+}

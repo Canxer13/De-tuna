@@ -1,0 +1,231 @@
+/* ====== HERO SECTION ====== */
+.hero {
+  position: relative;
+  /* (Saya ambil dari style asli 'hero' Anda) */
+  background: url("/image/home atas.png") center/cover no-repeat;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+}
+
+/* (Saya ganti nama '.hero-content' dari CSS lama Anda 
+   menjadi '.overlay' agar cocok dengan Home.jsx) */
+.overlay {
+  position: relative;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.4);
+  /* (Saya tambahkan padding agar terlihat seperti desain) */
+  padding: 40px;
+  border-radius: 10px;
+  max-width: 90%;
+}
+
+.overlay h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.overlay p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+/* ===== HERO BOOKING BAR ===== */
+.booking-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px 30px;
+  border-radius: 50px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  flex-wrap: wrap;
+  /* (Ubah 'color' agar teks label terlihat) */
+  color: #333;
+}
+
+.booking-item {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.booking-item label {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.booking-item input {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.booking-bar .btn-book {
+  background: #f7e603;
+  color: #fff;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.booking-bar .btn-book:hover {
+  background: #fffb02;
+}
+
+/* ====== WELCOME SECTION ====== */
+.welcome {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.welcome h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #111;
+}
+
+.welcome p {
+  max-width: 700px;
+  margin: 0 auto;
+  color: #555;
+  line-height: 1.7;
+}
+
+.welcome img {
+  width: 400px;
+  border-radius: 10px;
+  margin-top: 30px;
+}
+
+/* ====== WHY US SECTION ====== */
+.why-us {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  padding: 80px 50px;
+  background: #f9f9f9;
+  flex-wrap: wrap;
+}
+
+.why-text {
+  flex: 1;
+  max-width: 500px;
+}
+
+.why-text h3 {
+  font-size: 2rem;
+  color: #111;
+  margin-bottom: 15px;
+}
+
+.why-text p {
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 25px;
+}
+
+.why-icons {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.why-icons div {
+  text-align: center;
+  flex: 1;
+  min-width: 100px;
+}
+
+.why-icons img {
+  width: 60px;
+  margin-bottom: 10px;
+}
+
+.why-img {
+  width: 420px;
+  border-radius: 12px;
+}
+
+/* ====== OFFER SECTION ====== */
+.offers {
+  background: #ffe4c4;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.offers h3 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #111;
+}
+
+.offers p {
+  color: #555;
+}
+
+.offer-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px;
+  width: 270px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.card h4 {
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+  color: #111;
+}
+
+.card p {
+  color: #777;
+  font-size: 0.95rem;
+}
+
+.card button {
+  background: #b67b3f;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+  margin-top: 12px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.card button:hover {
+  background: #9f6225;
+}

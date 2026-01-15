@@ -1,0 +1,93 @@
+.register-body {
+  display: flex;
+  height: 100vh;
+}
+
+/* Bagian kiri (gambar) */
+.left-side {
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Bagian kanan (form sign up) */
+.right-side {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}
+
+.signup-container {
+  width: 50%;
+  max-width: 400px;
+}
+
+.signup-container h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #1c1c1c;
+}
+
+.signup-container input {
+  width: 100%;
+  padding: 10px 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.signup-container a {
+  display: inline-block;
+  font-size: 14px;
+  color: #444;
+  text-decoration: none;
+  margin-bottom: 15px;
+}
+
+.signup-container a:hover {
+  text-decoration: underline;
+}
+
+.signup-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4c1f1f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.signup-container button:hover {
+  background-color: #3b1717;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.login-link a {
+  color: #000;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .register-body {
+    flex-direction: column;
+  }
+
+  .left-side {
+    height: 40vh;
+  }
+
+  .right-side {
+    height: 60vh;
+  }
+}
