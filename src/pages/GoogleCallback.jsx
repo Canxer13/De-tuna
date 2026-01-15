@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const GoogleCallback = () => {
   const location = useLocation();
   const [status, setStatus] = useState("Memproses login...");
@@ -28,14 +30,11 @@ const GoogleCallback = () => {
         localStorage.setItem("authToken", token);
 
         // 3. Minta data User lengkap ke API (karena di URL cuma ada token)
-        const response = await axios.get(
-          "import.meta.env.VITE_API_BASE_URL/api/v1/me",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get(`${BASE_URL}/api/v1/me`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         const userData = response.data.data; // Asumsi respon: { data: { ...user... } }
 
