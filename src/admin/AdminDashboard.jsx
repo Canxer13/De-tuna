@@ -119,7 +119,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     fetchData();
     if (activeTab === "rooms") fetchMasterFacilities();
-  }, [activeTab]);
+  });
 
   // --- 5. HANDLE DELETE ---
   const handleDelete = async (id) => {

@@ -22,7 +22,7 @@ const Rooms = () => {
 
   useEffect(() => {
     fetchRooms();
-  }, []); // Fetch awal
+  }); // Fetch awal
 
   const fetchRooms = async () => {
     setLoading(true);
